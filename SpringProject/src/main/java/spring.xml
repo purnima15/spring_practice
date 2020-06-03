@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+        default-init-method="myInit" default-destroy-method="cleanUp"
+        >
+
+
+
+
+	<bean id="triangle" class="com.practice.SpringProject.Triangle">
+	<!-- property used to set value using setter -->
+		<property name="type" value="Equilateral"></property>
+	
+	<!-- constructor-arg  used to set value using constructor -->
+		<constructor-arg value="30"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="p" class="com.practice.SpringProject.Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+	
+	<bean id="q" class="com.practice.SpringProject.Point">
+		<property name="x" value="0" />
+		<property name="y" value="20" />
+	</bean>
+	
+		<bean id="Point0" class="com.practice.SpringProject.Point">
+		<property name="x" value="${Point0.X}" />
+		<property name="y" value="${Point0.Y}" />
+	</bean>
+	
+	<bean id="Point1" class="com.practice.SpringProject.Point">
+		<property name="x" value="0" />
+		<property name="y" value="20" />
+	</bean>
+	
+	<bean id="Point2" class="com.practice.SpringProject.Point">
+		<property name="x" value="20" />
+		<property name="y" value="20" />
+	</bean>
+	
+	<bean id="Point3" class="com.practice.SpringProject.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+	
+	<bean id="Pointmerged" class="com.practice.SpringProject.Point">
+		<property name="x" value="50" />
+		<property name="y" value="60" />
+	</bean>
+	
+	
+	<bean id="Square" class="com.practice.SpringProject.Square">
+	
+		<!-- using ref we can point to an bean -->
+	
+		<property name="PointA" ref="Point0" />
+		<property name="PointB" ref="Point1" />
+		<property name="PointC" ref="Point2" />
+		<property name="PointD" ref="Point3" />
+	</bean>
+	
+	<bean id="Circle" class="com.practice.SpringProject.Circle">
+	
+		<!-- using ref we can point to an bean -->
+	
+		<property name="center" ref="Point1" />
+			</bean>
+	
+			<!--here square1 has inherited bean properties from the squre-->
+	
+	<bean id="Square1" class="com.practice.SpringProject.Square" parent="Square">
+	
+	</bean>
+	
+	<bean id="autoWDemo" class="com.practice.SpringProject.autowireDemo" autowire="byName"> 
+	
+	</bean>
+	
+	<bean id="Polygon" class="com.practice.SpringProject.Polygon">
+		<property name="Points">
+		
+			<!-- list tag to to refer list values -->
+		
+			<list>
+				<ref bean="Point0" />
+				<ref bean="Point1" />
+				<ref bean="Point2" />
+				<ref bean="Point3" />
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="Polygon1" class="com.practice.SpringProject.Polygon" parent="Polygon">
+		<property name="Points">
+		
+			<!--here we can add values to list and by using merge,
+			 we can merge both list otherwise it will override the list -->
+		
+			<list merge="true">
+				<ref bean="Pointmerged"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 
+	here no need to add bean tag as we are using @Component annotation for this class
+	
+	<bean id="AnnotationsDemo" class="com.practice.SpringProject.AnnotationsDemo">
+	</bean>-->
+	
+	<!--
+	to rename a bean
+	 <alias name="triangle" alias="trangle"/>-->
+	
+	<bean class="com.practice.SpringProject.DisplayBeanName"></bean>
+	
+	<bean class="com.practice.SpringProject.BeanFactoryPP"></bean>
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="config.properties"></property>
+    </bean>
+    
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    
+    	<property name="basenames">
+    		<list>
+    			<value>messageList</value>
+    		</list>
+    	</property>	
+    </bean>
+    <context:annotation-config />
+    
+    <context:component-scan base-package="com.practice.SpringProject" />
+        
+    
+    
+</beans>
