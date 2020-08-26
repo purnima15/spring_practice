@@ -52,15 +52,15 @@ public class Triangle implements ApplicationContextAware, BeanNameAware ,Initial
 		this.context=context;
 		
 	}
+	 //this is unimplemented methods of disposabledestruction,this is called at time of bean initialization
 
-  //this is unimplemented methods of initializingbean,this is called at time of bean initialization
 	public void destroy() throws Exception {
 		System.out.println("called at time of destoy of triangle");
 		
 	}
 
+	  //this is unimplemented methods of initializingbean,this is called at time of bean initialization
 
- //this is unimplemented methods of disposabledestruction,this is called at time of bean initialization
 	public void afterPropertiesSet() throws Exception {
 		System.out.println("called at time of init of triangle");
 		

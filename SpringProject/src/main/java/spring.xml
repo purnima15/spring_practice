@@ -74,7 +74,7 @@
 		<!-- using ref we can point to an bean -->
 	
 		<property name="center" ref="Point1" />
-			</bean>
+	</bean>
 	
 			<!--here square1 has inherited bean properties from the squre-->
 	
